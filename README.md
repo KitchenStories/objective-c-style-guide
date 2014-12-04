@@ -1,8 +1,7 @@
-# NYTimes Objective-C Style Guide
+# Kitchen Stories Objective-C Style Guide
 
-This style guide outlines the coding conventions of the iOS team at The New York Times. We welcome your feedback in [issues](https://github.com/NYTimes/objetive-c-style-guide/issues), [pull requests](https://github.com/NYTimes/objetive-c-style-guide/pulls) and [tweets](https://twitter.com/nytimesmobile). Also, [we're hiring](http://jobs.nytco.com/job/New-York-iOS-Developer-Job-NY/2572221/).
+This style guide outlines the coding conventions of the iOS team at Kitchen Stories. It is based on the [NYTimes Objective-C Style Guide](https://github.com/NYTimes/objective-c-style-guide).
 
-Thanks to all of [our contributors](https://github.com/NYTimes/objective-c-style-guide/contributors).
 
 ## Introduction
 
@@ -35,7 +34,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Booleans](#booleans)
 * [Singletons](#singletons)
 * [Imports](#imports)
-* [Xcode Project](#xcode-project)
+* [Localization](#localization)
 
 ## Dot-Notation Syntax
 
@@ -166,7 +165,7 @@ Property definitions should be used in place of naked instance variables wheneve
 
 #### Variable Qualifiers
 
-When it comes to the variable qualifiers [introduced with ARC](https://developer.apple.com/library/ios/releasenotes/objectivec/rn-transitioningtoarc/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW4), the qualifier (`__strong`, `__weak`, `__unsafe_unretained`, `__autoreleasing`) should be placed between the asterisks and the variable name, e.g., `NSString * __weak text`. 
+When it comes to the variable qualifiers [introduced with ARC](https://developer.apple.com/library/ios/releasenotes/objectivec/rn-transitioningtoarc/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW4), the qualifier (`__strong`, `__weak`, `__unsafe_unretained`, `__autoreleasing`) should be placed between the asterisks and the variable name, e.g., `NSString * __weak text`.
 
 ## Naming
 
@@ -444,20 +443,17 @@ Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#usin
 #import "NYTUserView.h"
 ```
 
-## Xcode project
+## Localization
 
-The physical files should be kept in sync with the Xcode project files in order to avoid file sprawl. Any Xcode groups created should be reflected by folders in the filesystem. Code should be grouped not only by type, but also by feature for greater clarity.
+Good localizable string keys have to fulfill two requirements: first, they must be unique for each context they’re used in, and second, they must stick out if we forgot to translate something.
 
-When possible, always turn on "Treat Warnings as Errors" in the target's Build Settings and enable as many [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) as possible. If you need to ignore a specific warning, use [Clang's pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas).
+We recommend using a name-spaced approach like this:
 
-# Other Objective-C Style Guides
+```objc
+NSLocalizedString(@"activity-profile.title.the-run", nil);
+NSLocalizedString(@"home.button.start-run", nil);
+```
 
-If ours doesn't fit your tastes, have a look at some other style guides:
+By defining the keys like that, you can create a nice separation between different parts of the app and immediately provide some context within the key, like specifying that a certain string is used as a title or as a button. We’re omitting the comments in this example for the sake of brevity, but you should use them if the key does not provide enough context. Be sure to only use ASCII characters in string keys.
 
-* [Google](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
-* [GitHub](https://github.com/github/objective-c-conventions)
-* [Adium](https://trac.adium.im/wiki/CodingStyle)
-* [Sam Soffes](https://gist.github.com/soffes/812796)
-* [CocoaDevCentral](http://cocoadevcentral.com/articles/000082.php)
-* [Luke Redpath](http://lukeredpath.co.uk/blog/my-objective-c-style-guide.html)
-* [Marcus Zarra](http://www.cimgf.com/zds-code-style-guide/)
+Text and example taken from  [objc.io](http://www.objc.io/issue-9/string-localization.html).
