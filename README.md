@@ -453,5 +453,5 @@ Additionally we make use of a global `common.` namespace for universal strings t
 
 **For example:**
 ```objc
-common.alert.requester.ok-button
+common.alert.ok-button
 ```
