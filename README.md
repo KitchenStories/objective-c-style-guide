@@ -133,7 +133,7 @@ Some of Apple’s APIs write garbage values to the error parameter (if non-NULL)
 
 In method signatures, there should be a space after the scope (-/+ symbol). There should be a space between the method segments.
 
-**For Example**:
+**For example**:
 ```objc
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
@@ -174,13 +174,11 @@ Apple naming conventions should be adhered to wherever possible, especially thos
 Long, descriptive method and variable names are good.
 
 **For example:**
-
 ```objc
 UIButton *settingsButton;
 ```
 
 **Not**
-
 ```objc
 UIButton *setBut;
 ```
@@ -188,7 +186,6 @@ UIButton *setBut;
 A three letter prefix (e.g. `NYT`) should always be used for class names and constants, however may be omitted for Core Data entity names. Constants should be camel-case with all words capitalized and prefixed by the related class name for clarity.
 
 **For example:**
-
 ```objc
 static const NSTimeInterval NYTArticleViewControllerNavigationFadeAnimationDuration = 0.3;
 ```
@@ -204,7 +201,6 @@ Properties and local variables should be camel-case with the leading word being 
 Instance variables should be camel-case with the leading word being lowercase, and should be prefixed with an underscore. This is consistent with instance variables synthesized automatically by LLVM. **If LLVM can synthesize the variable automatically, then let it.**
 
 **For example:**
-
 ```objc
 @synthesize descriptiveVariableName = _descriptiveVariableName;
 ```
@@ -243,7 +239,6 @@ Block comments should generally be avoided, as code should be as self-documentin
 `NSString`, `NSDictionary`, `NSArray`, and `NSNumber` literals should be used whenever creating immutable instances of those objects. Pay special care that `nil` values not be passed into `NSArray` and `NSDictionary` literals, as this will cause a crash.
 
 **For example:**
-
 ```objc
 NSArray *names = @[@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul"];
 NSDictionary *productManagers = @{@"iPhone" : @"Kate", @"iPad" : @"Kamal", @"Mobile Web" : @"Bill"};
@@ -267,7 +262,6 @@ When accessing the `x`, `y`, `width`, or `height` of a `CGRect`, always use the 
 > All functions described in this reference that take CGRect data structures as inputs implicitly standardize those rectangles before calculating their results. For this reason, your applications should avoid directly reading and writing the data stored in the CGRect data structure. Instead, use the functions described here to manipulate rectangles and to retrieve their characteristics.
 
 **For example:**
-
 ```objc
 CGRect frame = self.view.frame;
 
@@ -293,7 +287,6 @@ CGFloat height = frame.size.height;
 Constants are preferred over in-line string literals or numbers, as they allow for easy reproduction of commonly used variables and can be quickly changed without the need for find and replace. Constants should be declared as `static` constants and not `#define`s unless explicitly being used as a macro.
 
 **For example:**
-
 ```objc
 static NSString * const NYTAboutViewControllerCompanyName = @"The New York Times Company";
 
@@ -312,8 +305,7 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 
 When using `enum`s, it is recommended to use the new fixed underlying type specification because it has stronger type checking and code completion. The SDK now includes a macro to facilitate and encourage use of fixed underlying types — `NS_ENUM()`
 
-**Example:**
-
+**For example:**
 ```objc
 typedef NS_ENUM(NSInteger, NYTAdRequestState) {
     NYTAdRequestStateInactive,
@@ -325,7 +317,7 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 
 When working with bitmasks, use the `NS_OPTIONS` macro.
 
-**Example:**
+**For example:**
 
 ```objc
 typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
@@ -341,7 +333,6 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 Private properties should be declared in class extensions (anonymous categories) in the implementation file of a class. Named categories (such as `NYTPrivate` or `private`) should never be used unless extending another class.
 
 **For example:**
-
 ```objc
 @interface NYTAdvertisement ()
 
@@ -457,3 +448,10 @@ NSLocalizedString(@"home.button.start-run", nil);
 By defining the keys like that, you can create a nice separation between different parts of the app and immediately provide some context within the key, like specifying that a certain string is used as a title or as a button. We’re omitting the comments in this example for the sake of brevity, but you should use them if the key does not provide enough context. Be sure to only use ASCII characters in string keys.
 
 Text and example taken from  [objc.io](http://www.objc.io/issue-9/string-localization.html).
+
+Additionally we make use of a global `common.` namespace for universal strings that should be the same throughout the whole app.
+
+**For example:**
+```objc
+common.alert.requester.ok-button
+```
