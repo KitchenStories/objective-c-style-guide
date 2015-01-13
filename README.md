@@ -445,7 +445,9 @@ NSLocalizedString(@"activity-profile.title.the-run", nil);
 NSLocalizedString(@"home.button.start-run", nil);
 ```
 
-By defining the keys like that, you can create a nice separation between different parts of the app and immediately provide some context within the key, like specifying that a certain string is used as a title or as a button. We’re omitting the comments in this example for the sake of brevity, but you should use them if the key does not provide enough context. Be sure to only use ASCII characters in string keys.
+By defining the keys like that, you can create a nice separation between different parts of the app and immediately provide some context within the key, like specifying that a certain string is used as a title or as a button. We’re omitting the comments in this example for the sake of brevity, but you should use them if the key does not provide enough context. This is for example the case when placeholders like %@ are used. Write down in the Comment what the Placeholder is standing for. 
+
+Be sure to only use ASCII characters in string keys.
 
 Text and example taken from  [objc.io](http://www.objc.io/issue-9/string-localization.html).
 
