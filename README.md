@@ -35,6 +35,7 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Singletons](#singletons)
 * [Imports](#imports)
 * [Localization](#localization)
+* [Header Files](#header-files)
 
 ## Dot-Notation Syntax
 
@@ -418,6 +419,10 @@ This will prevent [possible and sometimes prolific crashes](http://cocoasamurai.
 
 ## Imports
 
+* Only #import the super class, and adopted protocols, in header files.
+* #import all classes, and protocols, you send messages to in implementation.
+* Use forward declarations (`@class KSRecipe`) for everything else.
+
 If there is more than one import statement, group the statements [together](http://ashfurrow.com/blog/structuring-modern-objective-c). Commenting each group is optional.
 
 Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#using-modules) syntax.
@@ -457,3 +462,7 @@ Additionally we make use of a global `common.` namespace for universal strings t
 ```objc
 common.alert.ok-button
 ```
+
+## Header Files
+
+Header files define the **interface** of a class. Only expose constants, delegate implementations, properties and methods that have to be accessed by other objects.
